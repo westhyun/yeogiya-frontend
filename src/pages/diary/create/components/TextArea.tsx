@@ -2,6 +2,7 @@ import styled from "@emotion/styled";
 
 interface TextAreaProps {
   name: string;
+  contents?: string;
   label?: string;
   placeholder?: string;
   onChange?: (e: React.ChangeEvent<HTMLTextAreaElement>) => void;
@@ -11,6 +12,7 @@ const TextArea = ({
   label,
   placeholder,
   onChange,
+  contents,
   ...props
 }: TextAreaProps) => {
   return (
@@ -21,6 +23,7 @@ const TextArea = ({
         name={name}
         placeholder={placeholder}
         onChange={onChange}
+        value={contents}
         {...props}
       />
     </>
