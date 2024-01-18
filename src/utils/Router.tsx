@@ -27,6 +27,7 @@ import SNSLogin from "@/pages/login/components/SNSLogin";
 import NotFoundPage from "@/pages/404/NotFoundPage";
 import DiaryDetailPage from "@/pages/diary/detail/DiaryDetailPage";
 import { Fragment } from "react";
+import DiaryModifyPage from "@/pages/diary/modify/DiaryModifyPage";
 
 export const router = createBrowserRouter([
   {
@@ -85,6 +86,10 @@ export const router = createBrowserRouter([
       {
         path: PATH.DIARY_CREATE_DATE,
         element: <DiaryCreatePage />,
+      },
+      {
+        path: PATH.DIARY_MODIFY_DATE,
+        element: <DiaryModifyPage />,
       },
       {
         path: PATH.DIARY_DETAIL,
