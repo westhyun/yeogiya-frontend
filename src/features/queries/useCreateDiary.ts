@@ -15,7 +15,7 @@ interface CreateDiaryProps {
   };
 }
 
-export const useCreateDiary = (
+export const usePostDiary = (
   option?: UseMutationOptions<any, any, CreateDiaryProps>
 ) => {
   return useMutation({
@@ -58,10 +58,6 @@ export const useCreateDiary = (
       fileImages.forEach((image: File, index: number) => {
         DiaryFormData.append("diaryImage", image);
       });
-
-      // Object.entries(fileImages).forEach(([key, value]) => {
-      //   DiaryFormData.append("diaryImage", value);
-      // });
 
       DiaryFormData.append("diary", diaryBlob);
       DiaryFormData.append("place", placeBlob);
