@@ -1,8 +1,8 @@
 import theme from "@/styles/theme";
 import styled from "@emotion/styled";
 import { Dispatch, SetStateAction, useState } from "react";
-import { TextCount } from "../DiaryCreatePage";
 import DeleteIcon from "@/assets/images/DeleteIcon";
+import { TextCount } from "./DiaryForm";
 
 interface InputTagProps {
   tagValue: string[];
