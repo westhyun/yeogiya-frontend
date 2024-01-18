@@ -5,15 +5,15 @@ import { WITHDRAWAL_GUIDES, WITHDRAWAL_REASONS } from "@/constants/withdrawal";
 import { useWithdraw } from "@/features/queries/useWithdraw";
 import usePageNavigation from "@/features/hooks/usePageNavigation";
 import { useToken } from "@/features/hooks/useToken";
-import {
-  CancelButton,
-  SuccessButton,
-} from "@/pages/diary/create/DiaryCreatePage";
 import theme from "@/styles/theme";
 import { PATH } from "@/utils/routes";
 import styled from "@emotion/styled";
 import { FormEvent, useEffect, useState } from "react";
 import { useInfo } from "@/features/hooks/useInfo";
+import {
+  CancelButton,
+  SuccessButton,
+} from "@/pages/diary/create/components/DiaryForm";
 
 interface WithdrawalProps {
   privacy: boolean;
