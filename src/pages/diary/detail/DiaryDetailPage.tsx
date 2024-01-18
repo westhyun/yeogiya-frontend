@@ -2,12 +2,13 @@ import Layout from "@/components/@common/Layout";
 import styled from "@emotion/styled";
 import DefaultButton from "@/components/@common/DefaultButton";
 import theme from "@/styles/theme";
-import { ContentsStyle, Location } from "../create/DiaryCreatePage";
 import { StarIcon } from "@/assets";
 import { useEffect, useState } from "react";
 import { useDiaryDetail } from "@/features/queries/useDiaryDetail";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { useDeleteDiary } from "@/features/queries/useDeleteDiary";
+import { ContentsStyle, Location } from "../create/components/DiaryForm";
+import { PATH } from "@/utils/routes";
 
 export interface DiaryDetailProps {
   status: string;
@@ -26,6 +27,7 @@ export interface DiaryDetailProps {
 
 const DiaryDetailPage = () => {
   const params = useParams();
+  const navigate = useNavigate();
   const StarNumber = Array.from({ length: 5 }, (_, index) => index + 1);
   const [rating, setRating] = useState<number>();
 
@@ -74,7 +76,10 @@ const DiaryDetailPage = () => {
           color={theme.color.black89}
           onClick={() => deleteDiary.mutate({})}
         />
-        <EditButton text="수정" />
+        <EditButton
+          text="수정"
+          onClick={() => navigate(`${PATH.DIARY}/modify/${params.diaryId}`)}
+        />
       </ButtonLayout>
     </Layout>
   );

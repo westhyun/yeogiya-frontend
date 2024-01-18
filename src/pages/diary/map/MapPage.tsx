@@ -35,7 +35,7 @@ const MapPage = () => {
     );
 
     const date = pathname.split("/").at(-1);
-    navigate(`${PATH.DIARY_CREATE}/${date}`);
+    navigate(`${PATH.DIARY_CREATE_DATE}/${date}`);
   };
 
   return (
