@@ -16,3 +16,7 @@ export const deleteDiary = async (diaryId: number) => {
 export const postDiary = (data: FormData) => {
   return httpClient.post(URL.DIARY_LIST, data);
 };
+
+export const patchDiary = (data: FormData, diaryId: number) => {
+  return httpClient.patch(`${URL.DIARY_LIST}/${diaryId}`, data);
+};

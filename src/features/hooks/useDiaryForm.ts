@@ -13,6 +13,7 @@ export const useDiaryForm = () => {
   const [selectedDate, setSelectedDate] = useState<string>(createDate);
   const [fileImages, setFileImages] = useState<File[]>([]);
   const [contents, setContents] = useState<string>("");
+  const [showImages, setShowImages] = useState<string[]>([]);
 
   const onTextCount = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     setContents(e.target.value);
@@ -44,5 +45,7 @@ export const useDiaryForm = () => {
     setFileImages,
     setIsActive,
     setContents,
+    showImages,
+    setShowImages,
   };
 };

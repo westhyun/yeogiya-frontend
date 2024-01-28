@@ -52,9 +52,10 @@ export const httpClient = {
   patch: async (url: RequestInfo | URL, data: BodyInit) => {
     return await fetch(url, {
       method: "PATCH",
-      headers: {
-        Authorization: `Bearer ${localStorage.getItem(TOKEN.ACCESS_TOKEN)}`,
-      },
+      // headers: {
+      //   Authorization: `Bearer ${localStorage.getItem(TOKEN.ACCESS_TOKEN)}`,
+      // },
+      ...postHeaders(data),
       body: data,
     });
   },

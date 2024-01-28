@@ -16,8 +16,9 @@ import TextArea from "./TextArea";
 import Rating from "./Rating";
 import DatePicker from "./DatePicker";
 import { useDiaryForm } from "@/features/hooks/useDiaryForm";
-import { usePostDiary } from "@/features/queries/useCreateDiary";
 import { useEffect } from "react";
+import { useCreateDiary } from "@/features/queries/useCreateDiary";
+import { useModifyDiary } from "@/features/queries/useModifyDiary";
 
 const DiaryForm = ({ mode, defaultValues }) => {
   const { navigate } = usePageNavigation();
@@ -40,6 +41,8 @@ const DiaryForm = ({ mode, defaultValues }) => {
     setFileImages,
     setIsActive,
     setContents,
+    showImages,
+    setShowImages,
   } = useDiaryForm();
 
   const isModifyMode = mode === "MODE_MODIFY";
@@ -52,19 +55,42 @@ const DiaryForm = ({ mode, defaultValues }) => {
       setClicked(
         Array.from({ length: 5 }, (_, index) => index < defaultValues.clicked)
       );
-      setFileImages(defaultValues.fileImages);
+      setShowImages(defaultValues.fileImages);
       setIsActive(defaultValues.isActive);
       setTagValue(defaultValues.tagValue);
     }
-
-    console.log(defaultValues, "defaultValues>>");
   }, [mode, defaultValues]);
 
-  const postDiary = usePostDiary();
+  const postDiary = useCreateDiary();
+  const patchDiary = useModifyDiary(defaultValues.diaryId);
   const diaryState = useAppSelector(diary);
 
   const handleSubmit = () => {
-    isCreateMode && handleSubmitCreate();
+    if (isCreateMode) return handleSubmitCreate();
+    if (isModifyMode) return handleSubmitModify();
+  };
+
+  const handleSubmitModify = () => {
+    if (!isValid) return;
+    const newStar = clicked.filter((v) => v === true).length;
+
+    patchDiary.mutate(
+      {
+        diaryContent: {
+          fileImages,
+          tagValue,
+          selectedDate,
+          star: newStar,
+          isActive,
+          contents,
+          kakaoId: diaryState.kakaoId,
+          name: defaultValues.placeName,
+        },
+      },
+      {
+        onSuccess: () => navigate(PATH.DIARY_LIST),
+      }
+    );
   };
 
   const handleSubmitCreate = () => {
@@ -122,7 +148,12 @@ const DiaryForm = ({ mode, defaultValues }) => {
         </ContentsStyle>
         <TextCount>{textCount ?? 0} / 1,000</TextCount>
         <InputTag tagValue={tagValue} setTagValue={setTagValue} />
-        <UploadImage fileImages={fileImages} setFileImages={setFileImages} />
+        <UploadImage
+          fileImages={fileImages}
+          setFileImages={setFileImages}
+          showImages={showImages}
+          setShowImages={setShowImages}
+        />
         <ShareStyle>
           <p>공개 여부</p>
           <ToggleButton isActive={isActive} setIsActive={setIsActive} />

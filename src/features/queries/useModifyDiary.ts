@@ -1,21 +1,9 @@
-import { postDiary } from "@/apis/diary";
 import { UseMutationOptions, useMutation } from "@tanstack/react-query";
+import { DiaryFormProps } from "./useCreateDiary";
+import { patchDiary } from "@/apis/diary";
 
-export interface DiaryFormProps {
-  diaryContent: {
-    fileImages?: File[];
-    tagValue?: string[];
-    selectedDate: string;
-    star?: number;
-    isActive: boolean;
-    contents: string;
-    kakaoId: number;
-    name: string;
-    address?: string;
-  };
-}
-
-export const useCreateDiary = (
+export const useModifyDiary = (
+  diaryId: number,
   option?: UseMutationOptions<any, any, DiaryFormProps>
 ) => {
   return useMutation({
@@ -31,6 +19,8 @@ export const useCreateDiary = (
         name,
         address,
       } = diaryContent;
+      console.log(diaryContent, "diaryContent>");
+
       const DiaryFormData = new FormData();
 
       let diaryData = {
@@ -42,7 +32,7 @@ export const useCreateDiary = (
       };
 
       let placeData = {
-        kakaoId,
+        kakaoId: 1,
         name, // optional
         address, // optional
       };
@@ -62,7 +52,7 @@ export const useCreateDiary = (
       DiaryFormData.append("diary", diaryBlob);
       DiaryFormData.append("place", placeBlob);
 
-      return postDiary(DiaryFormData);
+      return patchDiary(DiaryFormData, diaryId);
     },
     ...option,
   });

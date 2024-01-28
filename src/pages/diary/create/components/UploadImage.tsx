@@ -7,11 +7,17 @@ import { Dispatch, SetStateAction, useRef, useState } from "react";
 interface UploadImageProps {
   fileImages: File[];
   setFileImages: Dispatch<SetStateAction<File[]>>;
+  showImages: string[];
+  setShowImages: Dispatch<SetStateAction<string[]>>;
 }
 
-const UploadImage = ({ fileImages, setFileImages }: UploadImageProps) => {
+const UploadImage = ({
+  fileImages,
+  setFileImages,
+  showImages,
+  setShowImages,
+}: UploadImageProps) => {
   const fileInput = useRef(null);
-  const [showImages, setShowImages] = useState([]);
 
   const handleButtonClick = () => {
     fileInput.current.click();

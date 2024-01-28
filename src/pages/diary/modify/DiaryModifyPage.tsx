@@ -18,6 +18,7 @@ const DiaryModifyPage = () => {
     fileImages: diaryDetailData.body.diaryImages,
     isActive: diaryDetailData.body.openYn,
     placeName: diaryDetailData.body.placeName,
+    diaryId: diaryDetailData.body.diaryId,
   };
 
   return <DiaryForm mode="MODE_MODIFY" defaultValues={defaultValues} />;
